@@ -9,7 +9,6 @@ public class pageController{
 
 	@RequestMapping(value = "/ys", method = RequestMethod.GET)
 	public String swagger(){
-		System.out.println("ys");
 		return "/swagger-ui.html";
 	}
 

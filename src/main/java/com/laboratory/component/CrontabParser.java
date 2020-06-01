@@ -53,7 +53,7 @@ public class CrontabParser {
 		for (int i = size; i > 0; i--) {
 			sb.append(parse(i - 1, splitArgs[i - 1]));
 		}
-		sb.append(splitArgs[5]);
+		//sb.append(splitArgs[5]);		작업내용을 추가로 다섯번쨰 파라미터로 받을거면 위에서 같이 조합 후 이거 어펜드 주석해제
 		return sb.toString();
 
 	}

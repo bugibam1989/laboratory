@@ -16,7 +16,7 @@ public class GlobalException implements HandlerExceptionResolver{
 	@Override
 	public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler,
 			Exception ex) {
-
+		ex.printStackTrace();
 		String msg = String.format(
 				"[ERROR] 호출주소 : %s 예외처리 내용 : %s",
 				request.getRequestURI(),ex.getMessage());
