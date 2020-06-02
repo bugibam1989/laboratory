@@ -10,7 +10,7 @@ import com.laboratory.model.User;
 public class UserService {
 
 	@Autowired
-	UserMapper userMapper;
+	private UserMapper userMapper;
 	
 	public User getUserById(String user_id) {
 		return userMapper.selectUserByUserId(user_id);
