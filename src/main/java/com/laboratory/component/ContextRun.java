@@ -20,8 +20,7 @@ public class ContextRun implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		System.out.println("<-------------------- BEAN LOADED ------------------->");
-		Arrays.asList(context.getBeanDefinitionNames()).stream()
-		.forEach(System.out::println);
+		Arrays.asList(context.getBeanDefinitionNames()).stream().forEach(System.out::println);
 		System.out.println("<-------------------- BEAN END ------------------->");
 		RequestMappingHandlerAdapter ad = new RequestMappingHandlerAdapter();
 	}

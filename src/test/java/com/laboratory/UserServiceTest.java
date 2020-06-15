@@ -11,7 +11,6 @@ import com.laboratory.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @SpringBootTest
 @RunWith(SpringRunner.class)
 public class UserServiceTest {
@@ -21,7 +20,11 @@ public class UserServiceTest {
 	
 	@Test
 	public void getUserById() {
-		User user = svc.getUserById("ys");
-		log.info(user.toString());
+		try {
+			User user = svc.getUserById("ys");
+			System.out.println(user.toString());
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
