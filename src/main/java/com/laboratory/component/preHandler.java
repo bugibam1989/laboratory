@@ -13,7 +13,8 @@ public class preHandler extends HandlerInterceptorAdapter{
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		
+		System.out.println("[ CONTEXT PATH ] : "+request.getContextPath());
+		System.out.println("[ getRequestURI ] : "+request.getRequestURI());
 		return super.preHandle(request, response, handler);
 	}
 

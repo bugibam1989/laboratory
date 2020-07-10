@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
-import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 
 @Component
 public class ContextRun implements CommandLineRunner{
@@ -22,7 +21,8 @@ public class ContextRun implements CommandLineRunner{
 		System.out.println("<-------------------- BEAN LOADED ------------------->");
 		Arrays.asList(context.getBeanDefinitionNames()).stream().forEach(System.out::println);
 		System.out.println("<-------------------- BEAN END ------------------->");
-		RequestMappingHandlerAdapter ad = new RequestMappingHandlerAdapter();
+//		RequestMappingHandlerAdapter ad = new RequestMappingHandlerAdapter();
+		
 	}
 
 }

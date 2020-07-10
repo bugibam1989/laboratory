@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class pageController{
-
-	@RequestMapping(value = "/ys", method = RequestMethod.GET)
+	
+	@RequestMapping(value = "/swagger", method = RequestMethod.GET)
 	public String swagger(){
-		return "/swagger-ui.html";
+		return "/swagger-ui";
 	}
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
@@ -21,5 +21,17 @@ public class pageController{
 	public String myHome() {
 		System.out.println("myhome");
 		return "myHome";
+	}
+	
+	@RequestMapping(value = "/06", method = RequestMethod.GET)
+	public String excel() {
+		System.out.println("/06");
+		return "jscell";
+	}
+
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	public String test() {
+		System.out.println("test");
+		return "test";
 	}
 }

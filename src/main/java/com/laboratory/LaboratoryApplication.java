@@ -10,5 +10,7 @@ public class LaboratoryApplication {
 		SpringApplication app = new SpringApplication(LaboratoryApplication.class);
 		app.run(args);
 	}
-
+	
+	
+	
 }

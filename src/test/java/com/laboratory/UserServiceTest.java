@@ -9,8 +9,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.laboratory.model.User;
 import com.laboratory.service.UserService;
 
-import lombok.extern.slf4j.Slf4j;
-
 @SpringBootTest
 @RunWith(SpringRunner.class)
 public class UserServiceTest {

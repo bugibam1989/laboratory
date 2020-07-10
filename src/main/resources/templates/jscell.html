@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>js excel example 03</title>
+<link rel="stylesheet" href="https://bossanova.uk/jexcel/v4/jexcel.css" type="text/css" />
+<link rel="stylesheet" href="https://bossanova.uk/jsuites/v2/jsuites.css" type="text/css" />
+<link rel="stylesheet" href="/webjars/bootstrap/4.4.1-1/css/bootstrap.css">
+</head>
+<body>
+	<form id="fileForm" method="post" enctype="multipart/form-data" action="upload(file)">
+		<input type="file" name="file" onChange="upload(file)">
+	</form>
+		<h1>스프레드 시트 테스트로딩</h1>
+		<div id='my-spreadsheet2'></div>
+		<h1>스프레드 시트 테스트</h1>
+		<div id='my-spreadsheet'></div>
+		<!-- SCRIPT -->
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+		<script src="https://bossanova.uk/jexcel/v4/jexcel.js"></script>
+		<script src="https://bossanova.uk/jsuites/v2/jsuites.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.13.5/jszip.js"></script>
+		<script src="https://bossanova.uk/jexcel/v3/xlsx.js"></script>
+		<script src="/webjars/bootstrap/4.4.1-1/js/bootstrap.js"></script>
+		<script>
+var data;
+var parse;
+
+function upload(val){
+	var data = new FormData();
+	data.append("file",val.files[0]);
+	$.ajax({
+        type: "post",
+        dataType: "json",
+        url :  "/upload",
+        data: data,
+		enctype: "multipart/form-data",
+		cache: false,
+		contentType:false,
+		processData: false,
+		async: false,
+        success : function(data) {
+        	console.log(data);
+        },
+        error : function(xhr, status, error) {
+        	console.log({xhr,status,error});
+        }
+    });
+}
+
+function toJson(event){
+    var input = event.target;
+    var reader = new FileReader();
+    reader.onload = function(){
+        var fileData = reader.result;
+        var wb = XLSX.read(fileData, {type : 'binary'});
+        wb.SheetNames.forEach(function(sheetName){
+            console.log("[이거이거]"+sheetName);
+	        var rowObj =XLSX.utils.sheet_to_json(wb.Sheets[sheetName]);
+	        console.log("[ROWOBJ]"+JSON.stringify(rowObj));
+        })
+    };
+   var readData= reader.readAsBinaryString(input.files[0]);
+   fromJson(readData);
+}
+
+function excelExport(event){
+	data = event.path[0].value;
+	//parse = toJson(data);
+	fromJson(parse)
+}
+
+
+function fromJson(val){
+	 jexcel(document.getElementById('my-spreadsheet2'),val);
+}
+
+function loadData(data){
+	jexcel.fromSpreadsheet(data, function(result) {
+	    if (! result.length) {
+	        console.error('JEXCEL: Something went wrong.');
+	    } else {
+	        if (result.length == 1) {
+	            jexcel(document.getElementById('my-spreadsheet2'), result[0]);
+	        } else {
+	            jexcel.createTabs(document.getElementById('my-spreadsheet2'), result);
+	        }
+	    }
+	});
+}
+<!--
+jexcel.fromSpreadsheet('/demo', function(result) {
+    if (! result.length) {
+        console.error('JEXCEL: Something went wrong.');
+    } else {
+        if (result.length == 1) {
+            jexcel(document.getElementById('my-spreadsheet'), result[0]);
+        } else {
+            jexcel.createTabs(document.getElementById('my-spreadsheet'), result);
+        }
+    }
+});
+-->
+</script>
+</body>
+</html>

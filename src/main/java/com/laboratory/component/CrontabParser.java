@@ -14,12 +14,12 @@ public class CrontabParser {
 	public static void main(String[] args) throws Exception {
 		CrontabParser cron = new CrontabParser();
 		String[] map2 = cron.tmp.split("\n");
-		String[] map1 = { "0 22 1-2,5-6,8-10,11-12 * 1-4,6,0 이거실행이거이거" };
+		//String[] map1 = { "0 22 1-2,5-6,8-10,11-12 * 1-4,6,0 이거실행이거이거" };
 		StringBuilder sb = new StringBuilder();
 		for (String item : map2) {
 			String[] cut = item.split(" ");
 			String rst = cut[0] + " " + cut[1] + " " + cut[2] + " " + cut[3] + " " + cut[4] + " " + cut[5];
-			String ori = item + "\n";
+			//String ori = item + "\n";
 			String pro = cron.process(rst) + "\n";
 			//sb.append("ORI : "+ ori);
 			sb.append("PRO "+ pro);
