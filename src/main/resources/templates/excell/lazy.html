@@ -1,0 +1,45 @@
+<html>
+<script src="https://bossanova.uk/jexcel/v4/jexcel.js"></script>
+<link rel="stylesheet" href="https://bossanova.uk/jexcel/v4/jexcel.css" type="text/css" />
+<script src="https://bossanova.uk/jsuites/v2/jsuites.js"></script>
+<link rel="stylesheet" href="https://bossanova.uk/jsuites/v2/jsuites.css" type="text/css" />
+스크롤링하며 로딩
+<div id="spreadsheet"></div>
+
+<script>
+jexcel(document.getElementById('spreadsheet'), {
+    csv:'https://bossanova.uk/jexcel/demo1.csv',
+    csvHeaders:false,
+    tableOverflow:true,
+    lazyLoading:true,
+    loadingSpin:true,
+    columns: [
+        {
+            type:'text',
+            width:200,
+            title:'Name'
+        },
+        {
+            type:'dropdown',
+            width:100,
+            title:'Age',
+            source:[
+            {
+                id:1,name:'Male'
+            },
+            {
+                id:2,
+                name:'Female'
+            }]
+        },
+        {
+            type:'text',
+            width:200,
+            title:'City'
+        },
+     ]
+});
+<script>
+
+</script>
+</html>

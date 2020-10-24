@@ -17,21 +17,7 @@ public class pageController{
 		return "index";
 	}
 
-	@RequestMapping(value = "/myHome", method = RequestMethod.GET)
-	public String myHome() {
-		System.out.println("myhome");
-		return "myHome";
-	}
 	
-	@RequestMapping(value = "/06", method = RequestMethod.GET)
-	public String excel() {
-		System.out.println("/06");
-		return "jscell";
-	}
 
-	@RequestMapping(value = "/test", method = RequestMethod.GET)
-	public String test() {
-		System.out.println("test");
-		return "test";
-	}
+	
 }

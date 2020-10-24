@@ -4,36 +4,139 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="/webjars/bootstrap/4.4.1-1/css/bootstrap.css">
+<link rel="stylesheet" href="https://bossanova.uk/jsuites/v2/jsuites.css" type="text/css" />
+<link rel="stylesheet" href="https://bossanova.uk/jexcel/v4/jexcel.css" type="text/css" />
 </head>
 <body>
-	Hello world
-	<div id="app">{{ msg }}</div>
-	<div id="app-2">
-		<span v-bind:title="message"> 내 위에 잠시 마우스를 올리면 동적으로 바인딩 된
-			title을 볼 수 있습니다! </span>
+
+<div class="container-fluid mb-5 mt-5">
+	<div class="row">
+		<div class="col-12">
+			<input class="btn btn-primary" type="file" value="업로드" onChange="upload(this)">			
+		</div>
 	</div>
-	<div id="app-3">
-		<p v-if="seen">이제 나를 볼 수 있어요</p>
+	<div class="row mb-5">
+		<div class="col-12">
+			<div id="gridSheet"></div>
+		</div>
 	</div>
-	<div id="app-4">
-	  <ol>
-	    <li v-for="todo in todos">
-	      {{ todo.text }}
-	    </li>
-	  </ol>
-	</div>
-	<div id="app-5">
-		<button v-on:click="reverseMessage">ADD</button>
-		<input v-model="newInput" class="" />
-	</div>
+</div>
+<div id="yoonjae"></div>
+	
 
 
+<div id="spreadsheet"></div>
 
-	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-	<script src="/webjars/jquery/3.4.1/jquery.min.js"></script>
-	<script src="/webjars/bootstrap/4.4.1-1/js/bootstrap.js"></script>
+<input type="button" value="탭추가" onclick="add()" style="width:150px;">
+<input type="button" value="Download selected tab" onclick="download()" style="width:150px;">
+	
 
-	<script src="static/js/commonJs.js"></script>
+<script src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+<script src="/webjars/bootstrap/4.4.1-1/js/bootstrap.js"></script>
+<!-- <script src="static/js/commonJs.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.13.5/jszip.js"></script>
+<script src="https://bossanova.uk/jexcel/v3/xlsx.js"></script>
+<script src="https://bossanova.uk/jexcel/v4/jexcel.js"></script>
+<script src="https://bossanova.uk/jsuites/v3/jsuites.js"></script>
+
+
+<script>
+
+jexcel.fromSpreadsheet('static/sample/sample_file.xlsx', function(result) {
+    if (! result.length) {
+        console.error('JEXCEL: Something went wrong.');
+    } else {
+    	debugger;
+        if (result.length == 1) {
+            jexcel(document.getElementById('gridSheet'), result[0]);
+        } else {
+            jexcel.createTabs(document.getElementById('gridSheet'), result);
+        }
+    }
+});
+ 
+function setData(result){
+	for(var sheetI=0; sheetI<result.DATA.length; sheetI++){
+		var sheetItem = result.DATA[sheetI];
+		var sheetName = sheetItem.sheetName;
+		for(var rowI=0; rowI<sheetItem.rows.length; rowI++){			// ROW
+			var rowItem = sheetItem.rows[rowI];
+			var rowNum = rowItem.rowNum;
+			var rowHeight = rowItem.rowHeight;
+			for(var cellI=0; cellI<rowItem.cellList.length; cellI++){	//CELL
+				var cellItem = rowItem.cellList[cellI];
+				var addr = cellItem.addr;
+				var type = cellItem.type;
+				var val = cellItem.val;
+				console.log(cellItem);
+			}
+		}
+	}
+	jexcel(document.getElementById('yoonjae'), {
+	    data:data
+	});
+}//end function
+
+
+function upload(file){
+	var data = new FormData();
+	data.append('file',file.files[0]);
+	$.ajax({ 
+		type: "POST", 
+		enctype: 'multipart/form-data', // 필수 
+		url: '/upload', 
+		data: data, // 필수 
+		processData: false, // 필수 
+		contentType: false, // 필수
+		cache: false
+		, success: function (result) {
+			console.log(JSON.stringify(result));
+		}, error: function (e) { 
+			console.log(e);			
+		} 
+	});
+}
+
+/**
+ * Add new worksheet
+ */
+var add = function() {
+    var sheets = [];
+
+    sheets.push({
+        sheetName: prompt('Create a new tab', 'New tab ' + document.getElementById('spreadsheet').jexcel.length),
+        minDimensions:[10,10]
+    });
+
+    jexcel.tabs(document.getElementById('spreadsheet'), sheets);
+}
+
+/**
+ * Download current worksheet
+ */
+var download = function() {
+    // Get selected tab
+    var worksheet = document.getElementById('spreadsheet').children[0].querySelector('.selected').getAttribute('data-spreadsheet');
+    // Download
+    document.getElementById('spreadsheet').jexcel[worksheet].download();
+}
+
+/**
+ * Create worksheet container with two jexcel instances
+ */
+var sheets = [
+    {
+        sheetName: 'Countries',
+        minDimensions:[10,10]
+    },
+    {
+        sheetName: 'Cities',
+        minDimensions:[10,10]
+    }
+];
+
+jexcel.tabs(document.getElementById('spreadsheet'), sheets);
+</script>
 
 </body>
 </html>

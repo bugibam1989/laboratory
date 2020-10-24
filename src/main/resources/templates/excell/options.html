@@ -1,0 +1,72 @@
+<html>
+<script src="https://bossanova.uk/jexcel/v4/jexcel.js"></script>
+<script src="https://bossanova.uk/jsuites/v2/jsuites.js"></script>
+<link rel="stylesheet" href="https://bossanova.uk/jexcel/v4/jexcel.css" type="text/css" />
+<link rel="stylesheet" href="https://bossanova.uk/jsuites/v2/jsuites.css" type="text/css" />
+글로벌 언어 설정 및 옵션모음
+<div id="spreadsheet"></div>
+
+<script>
+var data = [
+    ['Jazz', 'Honda', '2019-02-12', '', true, '$ 2.000,00', '#777700'],
+    ['Civic', 'Honda', '2018-07-11', '', true, '$ 4.000,01', '#007777'],
+];
+
+jexcel(document.getElementById('spreadsheet'), {
+    data:data,		// NULL 가능
+    columns: [		//컬럼 설정
+       /*  { type: 'text', title:'Car', width:120 },
+        { type: 'dropdown', title:'Make', width:200, source:[ "Alfa Romeo", "Audi", "Bmw" ] },
+        { type: 'calendar', title:'Available', width:200 },
+        { type: 'image', title:'Photo', width:120 },
+        { type: 'checkbox', title:'Stock', width:80 },
+        { type: 'numeric', title:'Price', width:100, mask:'$ #.##,00', decimal:',' },
+        { type: 'color', width:100, render:'square', } */
+        { type: 'text', width:120 },
+        { type: 'text',  width:120 },
+        { type: 'text',  width:120 },
+        { type: 'text',  width:120 },
+        { type: 'text',  width:120 },
+        { type: 'text',  width:120 },
+        { type: 'text',  width:120 }
+     ]
+	,minDimensions: [10, 20]	// 화면에 뿌릴  n*n 개수
+	,defaultColWidth: 100		// 컬럼 기본 길이
+	,tableWidth: "600px"		// 테이블 길이
+	,tableOverflow: true		// 오버 플로우 설정 여부
+	,columnDrag:true 			//컬럼 드래그
+	 ,freezeColumns: 2  		// n개만큼 스크롤시 고정된다
+	 ,text:{					//글로벌 표시 언어 설정
+	        noRecordsFound:'Nenhum registro encontrado',
+	        showingPage:'Mostrando página {0} de {1} entradas',
+	        show:'Show',
+	        entries:'entradas',
+	        insertANewColumnBefore:'Inserir uma nova coluna antes de',
+	        insertANewColumnAfter:'Inserir uma nova coluna depois de',
+	        deleteSelectedColumns:'Excluir colunas selecionadas',
+	        renameThisColumn:'Renomear esta coluna',
+	        orderAscending:'ordem ascendente',
+	        orderDescending:'Order decrescente',
+	        insertANewRowBefore:'Inserir uma nova linha antes de',
+	        insertANewRowAfter:'Inserir uma nova linha depois de',
+	        deleteSelectedRows:'Excluir linhas selecionadas',
+	        editComments:'Editar comentários',
+	        addComments:'Adicionar comentários',
+	        comments:'Comentários',
+	        clearComments:'Limpar comentários',
+	        copy:'Copiar ...',
+	        paste:'Colar ...',
+	        saveAs:'Salvar como ...',
+	        //about:​'About',
+	        areYouSureToDeleteTheSelectedRows:'Tem certeza de excluir as linhas selecionadas?',
+	        areYouSureToDeleteTheSelectedColumns:'Tem certeza de excluir as colunas selecionadas?',
+	        thisActionWillDestroyAnyExistingMergedCellsAreYouSure:'Esta ação irá destruir todas as células mescladas existentes. Você tem certeza?',
+	        thisActionWillClearYourSearchResultsAreYouSure:'Esta ação limpará seus resultados de pesquisa. Você tem certeza?',
+	        thereIsAConflictWithAnotherMergedCell:'Há um conflito com outra célula mesclada',
+	        invalidMergeProperties:'Propriedades mescladas inválidas',
+	        cellAlreadyMerged:'Cell já mesclado',
+	        noCellsSelected:'Nenhuma célula selecionada',
+	    }
+});
+</script>
+</html>

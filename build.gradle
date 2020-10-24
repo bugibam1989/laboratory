@@ -35,7 +35,7 @@ dependencies {
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 	
 	// 롬복
-	providedCompile group: 'org.projectlombok', name: 'lombok', version: '1.18.8'
+	compile group: 'org.projectlombok', name: 'lombok', version: '1.18.8'
 	
 	compile ('org.webjars:jquery:3.4.1')
 	compile ('org.webjars:bootstrap:4.4.1-1')
@@ -53,8 +53,8 @@ dependencies {
 	
 	// EXCEL
 	compile group: 'org.apache.poi', name: 'poi', version: '4.1.2'
-	
-	
+	compile group: 'org.apache.poi', name: 'poi-ooxml', version: '4.1.2'
+	compile group: 'org.apache.poi', name: 'poi-ooxml-schemas', version: '4.1.2'
 /*
 	// JSP  파서
 	compile('javax.servlet:jstl')
